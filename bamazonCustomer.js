@@ -1,25 +1,36 @@
-var mysql = require("mysql");
+let mysql = require("mysql");
+let inquirer = require("inquirer");
 
-var connection = mysql.createConnection({
+let connection = mysql.createConnection({
   host: "127.0.0.1",
-
-  // Your port; if not 3306
   port: 3306,
-
-  // Your username
   user: "root",
-
-  // Your password
   password: "Sleven76",
   database: "bamazon_db"
 });
 
 connection.connect(function(err) {
   if (err) throw err;
-  console.log("connected as id " + connection.threadId);
+  console.log("connected as id " + connection.threadId + "\n");
   queryAllProducts();
   queryDanceSongs();
 });
+
+// First display all of the items available for sale. Include the ids, names, and prices of products for sale //
+function runSearch() {
+  inquirer.prompt({
+
+  })
+}
+
+// Prompt users with two messages: ask user the id of the product they would like to buy / ask how many units of the product they would like to buy //
+
+
+// Once order is placed check stock quantity to see if there is enough to meet the customer's request //
+// If not enough in stock then display a message "Insufficient quantity!" and then prevent the order from going through //
+// If there is enough product in stock then fulfill the customer's order: update the SQL database to reflect the remaining quantity / once the update goes through, show the customer the total cost of their purchase //
+
+
 
 function queryAllProducts() {
 //V
