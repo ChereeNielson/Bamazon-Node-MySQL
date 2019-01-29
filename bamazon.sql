@@ -17,10 +17,17 @@ CREATE TABLE products (
 
 -- Insert data into the "products" table --
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("Earth Rated Dog Waste Bags", "Pet Supplies", 11.99, 300),
-  ("Petmate Charcoal Replacement Water Filters", "Pet Supplies" 2.17, 120),
-  ("Hugger Mugger Tropic Yoga Mat", "Exercise & Fitness Equipment" 25.23, 200),
-  ("Hugger Mugger Batik Yoga Mat Bag", "Exercise & Fitness Equipment" 39.95, 90),
+VALUES ("Earth Rated Dog Waste Bags", "Pet Supplies", 12.00, 300),
+  ("Petmate Charcoal Replacement Water Filters", "Pet Supplies" 2.20, 120),
+  ("Hugger Mugger Tropic Yoga Mat", "Exercise & Fitness Equipment" 25.25, 200),
+  ("Hugger Mugger Batik Yoga Mat Bag", "Exercise & Fitness Equipment" 40.00, 100),
+  ("Stance Women's Cream Frio Socks", "Clothing", 14.00, 25),
+  ("Foot Peel Mask Exfoliant", "Beauty & Personal Care", 16.00, 50),
+  ("Nag Champa Incense Sticks", "Home Fragrance", 10.00, 200),
+  ("doTERRA Essential Oil Kit", "Home Fragrance", 26.00, 50),
+  ("Stainless Steel Tea Infuser", "Home & Kitchen", 15.00, 50),
+  ("Nalgene Wide Mouth Water Bottle", "Sports & Outdoors", 11.00, 150)
+
 
 
 
