@@ -12,44 +12,44 @@ const CFonts = require("cfonts");
 
 // Welcome! //
 CFonts.say("Welcome to Bamazon!", {
-  font: "chrome",                       // define the font face
-  align: "left",                        // define text alignment
+  font: "chrome", // define the font face
+  align: "left", // define text alignment
   colors: ["blue", "green", "magenta"], // define all colors
-  background: "transparent",            // define the background color, you can also use `backgroundColor` here as key
-  letterSpacing: 2,                     // define letter spacing
-  lineHeight: 5,                        // define the line height
-  space: true,                          // define if the output text should have empty lines on top and on the bottom
-  maxLength: "0",                       // define how many character can be on one line
+  background: "transparent", // define the background color, you can also use `backgroundColor` here as key
+  letterSpacing: 2, // define letter spacing
+  lineHeight: 5, // define the line height
+  space: true, // define if the output text should have empty lines on top and on the bottom
+  maxLength: "0", // define how many character can be on one line
 });
 
 
 // Create Table with Columns //
 let table = new Table({
-    head: ["ID", "Product Name", "Department", "Price", "Stock"],
-    colWidth: 30,
-    align: "left",
-    style: {
-      head: ["blue"],
-      border: ["white"]
-    },
+  head: ["ID", "Product Name", "Department", "Price", "Stock"],
+  colWidth: 30,
+  align: "left",
+  style: {
+    head: ["blue"],
+    border: ["white"]
+  },
 });
 
 table.push(
-  [1,"Earth Rated Dog Waste Bags", "Pet Supplies", 11.99, 300],
-  [2,"Petmate Charcoal Replacement Water Filters", "Pet Supplies", 2.15, 120],
-  [3,"Hugger Mugger Tropic Yoga Mat", "Exercise & Fitness Equipment", 25.25, 200],
-  [4,"Hugger Mugger Batik Yoga Mat Bag", "Exercise & Fitness Equipment", 39.95, 100],
-  [5,"Stance Women's Cream Frio Socks", "Clothing", 13.99, 125],
-  [6,"Nag Champa Incense Sticks", "Home Fragrance", 9.99, 200],
-  [7,"doTERRA Family Essential Oil Kit", "Home Fragrance", 140.00, 50],
-  [8,"Stainless Steel Tea Infuser", "Home & Kitchen", 14.99, 50],
-  [9,"Nalgene Wide Mouth Water Bottle", "Sports & Outdoors", 11.00, 150],
-  [10,"Pepcid Complete Acid Reducer", "Pharmacy", 19.50, 100],
-  [11,"Ibuprofen Pain Reliever", "Pharmacy", 11.99, 20],
-  [12,"Nature's Way Raw Organic Coconut Oil", "Grocery", 8.48, 25],
-  [13,"Vega Protein+ Chocolate Shake (12 ct.)", "Grocery", 39.95, 25],
-  [14,"AudioQuest 4K Ultra HD HDMI Cable", "Electronics", 39.99, 80],
-  [15,"LCR Left Center Right Dice Game", "Games", 6.97, 50]
+  [1, "Earth Rated Dog Waste Bags", "Pet Supplies", 11.99, 300],
+  [2, "Petmate Charcoal Replacement Water Filters", "Pet Supplies", 2.15, 120],
+  [3, "Hugger Mugger Tropic Yoga Mat", "Exercise & Fitness Equipment", 25.25, 200],
+  [4, "Hugger Mugger Batik Yoga Mat Bag", "Exercise & Fitness Equipment", 39.95, 100],
+  [5, "Stance Women's Cream Frio Socks", "Clothing", 13.99, 125],
+  [6, "Nag Champa Incense Sticks", "Home Fragrance", 9.99, 200],
+  [7, "doTERRA Family Essential Oil Kit", "Home Fragrance", 140.00, 50],
+  [8, "Stainless Steel Tea Infuser", "Home & Kitchen", 14.99, 50],
+  [9, "Nalgene Wide Mouth Water Bottle", "Sports & Outdoors", 11.00, 150],
+  [10, "Pepcid Complete Acid Reducer", "Pharmacy", 19.50, 100],
+  [11, "Ibuprofen Pain Reliever", "Pharmacy", 11.99, 20],
+  [12, "Nature's Way Raw Organic Coconut Oil", "Grocery", 8.48, 25],
+  [13, "Vega Protein+ Chocolate Shake (12 ct.)", "Grocery", 39.95, 25],
+  [14, "AudioQuest 4K Ultra HD HDMI Cable", "Electronics", 39.99, 80],
+  [15, "LCR Left Center Right Dice Game", "Games", 6.97, 50]
 );
 console.log(table.toString());
 
@@ -75,12 +75,13 @@ function displayProducts() {
   stream.write([
     bold("ID"),
     bold("PRODUCT"),
+    bold("DEPARTMENT"),
     bold("PRICE"),
     bold("STOCK")
   ]);
-  connection.query("SELECT * FROM bamazon.products", function (err,response) {
+  connection.query("SELECT * FROM bamazon.products", function (err, response) {
     if (err) throw err;
-    for (var i = 0; i < response.length; +ii) {
+    for (var i = 0; i < response.length; + ii) {
       console.log(response);
 
       stream.write([
@@ -90,60 +91,13 @@ function displayProducts() {
         response[i].stock
       ]);
     }
-    connection.end();
+    // connection.end();
   })
 }
 
 
-
-
-
-
-
-  inquirer.prompt({
-    name: "product",
-    type: "input",
-    message: "What item would you like to purchase? (Choose ID)",
-    choices: [
-      "Earth Rated Dog Waste Bags",
-      "Petmate Charcoal Replacement Water Filters",
-      "Hugger Mugger Tropic Yoga Mat",
-      "Hugger Mugger Batik Yoga Mat Bag",
-      "Stance Women's Cream Frio Socks",
-      "Nag Champa Incense Sticks",
-      "doTERRA Family Essential Oil Kit",
-      "Stainless Steel Tea Infuser",
-      "Nalgene Wide Mouth Water Bottle",
-      "Pepcid Complete Acid Reducer",
-      "Ibuprofen Pain Reliever",
-      "Nature's Way Raw Organic Coconut Oil",
-      "Vega Protein+ Chocolate Shake (12 ct.)",
-      "AudioQuest 4K Ultra HD HDMI Cable",
-      "LCR Left Center Right Dice Game"
-    ]
-  }).then(function (answer) {
-    console.log(answer.product);
-    switch (answer.product) {
-      case "Find products by product":
-        productSearch();
-        break;
-    }
-  });
-
-// Ensure user can only use positive integers for input // 
-function validateInput(value) {
-  let integer = Number.isInteger(parseFloat(value));
-  let sign = Math.sign(value);
-
-  if (integer && (sign === 1)) {
-    return true;
-  } else {
-    return "Please enter a whole non-zero number."
-  }
-}
-
-// Prompt user with two messages: 1. ask user the id of the product they would like to buy / 2. ask how many units of the product they would like to buy //
-function promptUserPurchase() {
+// Prompt customer with two messages: 1. ask customer the id of the product they would like to purchase / 2. ask how many units of the product they would like to buy //
+function customerPrompt() {
   inquirer.prompt([{
       name: "id",
       type: "input",
@@ -162,6 +116,66 @@ function promptUserPurchase() {
 
   })
 }
+
+
+
+function customerSelection() {
+  displayProducts(function (response) {
+    let selectionArr = [];
+    for (var i = 0; i < response.length; i++) {
+      selectionArr.push(response[i].id + " " + response[i].product);
+    }
+    inquirer.prompt({
+      name: "product",
+      type: "input",
+      message: "What item would you like to purchase? (Choose ID)",
+      choices: [
+        "Earth Rated Dog Waste Bags",
+        "Petmate Charcoal Replacement Water Filters",
+        "Hugger Mugger Tropic Yoga Mat",
+        "Hugger Mugger Batik Yoga Mat Bag",
+        "Stance Women's Cream Frio Socks",
+        "Nag Champa Incense Sticks",
+        "doTERRA Family Essential Oil Kit",
+        "Stainless Steel Tea Infuser",
+        "Nalgene Wide Mouth Water Bottle",
+        "Pepcid Complete Acid Reducer",
+        "Ibuprofen Pain Reliever",
+        "Nature's Way Raw Organic Coconut Oil",
+        "Vega Protein+ Chocolate Shake (12 ct.)",
+        "AudioQuest 4K Ultra HD HDMI Cable",
+        "LCR Left Center Right Dice Game"
+      ]
+    }).then(function (answer) {
+      console.log(answer.product);
+      switch (answer.product) {
+        case "Find products by product":
+          productSearch();
+          break;
+      }
+      connection.end();
+    });
+  })
+};
+customerSelection();
+
+
+
+
+
+
+// Ensure user can only use positive integers for input // 
+// function validateInput(value) {
+//   let integer = Number.isInteger(parseFloat(value));
+//   let sign = Math.sign(value);
+
+//   if (integer && (sign === 1)) {
+//     return true;
+//   } else {
+//     return "Please enter a whole non-zero number."
+//   }
+// }
+
 
 
 
