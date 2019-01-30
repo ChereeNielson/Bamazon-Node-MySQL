@@ -1,11 +1,15 @@
+// Required Packages //
+require("dotenv").config();
+let secret = require("./secret.js");
+
 let mysql = require("mysql");
 let inquirer = require("inquirer");
 
 let connection = mysql.createConnection({
-  host: "127.0.0.1",
+  host: "localhost",
   port: 3306,
   user: "root",
-  password: "",
+  password: secret.pass.word,
   database: "bamazon"
 });
 
