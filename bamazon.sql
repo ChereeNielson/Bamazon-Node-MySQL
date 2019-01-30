@@ -7,15 +7,16 @@ USE bamazon;
 
 -- Create a table called "products" which will contain the store inventory --
 CREATE TABLE products (
-      item_id INT (11) AUTO_INCREMENT NOT NULL ,
-      product_name VARCHAR (50) NOT NULL,
-      department_name VARCHAR (50) NOT NULL,
+      id INT AUTO_INCREMENT NOT NULL ,
+      product VARCHAR(50) NOT NULL,
+      department VARCHAR(50) NOT NULL,
       price DECIMAL(10,2) NOT NULL,
-      stock_quantity INT (11) NOT NULL,
-      PRIMARY KEY (item_id)
+      stock INT(11) DEFAULT 0,
+      PRIMARY KEY (id)
 );
 
--- Insert data into the "products" table --
+SELECT * FROM products;
+
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Earth Rated Dog Waste Bags", "Pet Supplies", 11.99, 300),
   ("Petmate Charcoal Replacement Water Filters", "Pet Supplies" 2.15, 120),
@@ -32,4 +33,3 @@ VALUES ("Earth Rated Dog Waste Bags", "Pet Supplies", 11.99, 300),
   ("Vega Protein+ Chocolate Shake (12 ct.)", "Grocery", 39.95, 25),
   ("AudioQuest 4K Ultra HD HDMI Cable", "Electronics", 39.99, 80),
   ("LCR Left Center Right Dice Game", "Games", 6.97, 50)
-  
