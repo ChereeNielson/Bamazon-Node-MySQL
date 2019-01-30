@@ -6,24 +6,84 @@ let connection = mysql.createConnection({
   port: 3306,
   user: "root",
   password: "Sleven76",
-  database: "bamazon_db"
+  database: "bamazon"
 });
 
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId + "\n");
-  queryAllProducts();
-  queryDanceSongs();
+  productSearch();
 });
 
 // First display all of the items available for sale. Include the ids, names, and prices of products for sale //
 function runSearch() {
   inquirer.prompt({
+    name: "product_name",
+    type: "input",
+    message: "What product would you like to look for?",
+    choices: [
+      "Earth Rated Dog Waste Bags",
+      "Petmate Charcoal Replacement Water Filters",
+      "Hugger Mugger Tropic Yoga Mat",
+      "Hugger Mugger Batik Yoga Mat Bag",
+      "Stance Women's Cream Frio Socks",
+      "Nag Champa Incense Sticks",
+      "doTERRA Family Essential Oil Kit",
+      "Stainless Steel Tea Infuser",
+      "Nalgene Wide Mouth Water Bottle",
+      "Pepcid Complete Acid Reducer",
+      "Ibuprofen Pain Reliever",
+      "Nature's Way Raw Organic Coconut Oil",
+      "Vega Protein+ Chocolate Shake (12 ct.)",
+      "AudioQuest 4K Ultra HD HDMI Cable",
+      "LCR Left Center Right Dice Game"
+    ]
+  }).then(function(answer) {
+    console.log(answer.product_name);
+    switch (answer.product_name) {
+      case "Find products by product_name":
+      productSearch();
+      break;
+
+      case "Find all "
+    }
+  })
+}
+
+// Ensure user can only use positive integers for input // 
+function validateInput(value) {
+  let integer = Number.isInteger(parseFloat(value));
+  let sign = Math.sign(value);
+
+  if (integer && (sign === 1)) {
+    return true;
+  } else {
+    return "Please enter a whole non-zero number."
+  }
+}
+
+// Prompt user with two messages: 1. ask user the id of the product they would like to buy / 2. ask how many units of the product they would like to buy //
+function promptUserPurchase() {
+  inquirer.prompt([
+    {
+      name: "item_id",
+      type: "input",
+      message: "Please enter the Item ID of the product you would like to purchase.",
+      validate: validateInput,
+      filter: Number
+    },
+    {
+      name: "quantity",
+      type: "input",
+      message: "How many do you need?",
+      validate: validateInput,
+      filter: Number
+    }
+  ]).then(function(input) {
 
   })
 }
 
-// Prompt users with two messages: ask user the id of the product they would like to buy / ask how many units of the product they would like to buy //
 
 
 // Once order is placed check stock quantity to see if there is enough to meet the customer's request //
