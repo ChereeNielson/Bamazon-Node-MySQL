@@ -19,12 +19,13 @@ const connection = mysql.createConnection({
     database: "bamazon"
   });
   
-  connection.connect(function (err) {
+connection.connect(function (err) {
     if (err) {
-        console.log("connected as id " + connection.threadId + "\n");
+        console.log("Error connecting to DB");
+        throw err;
     }
-    throw err;
-  });
+    // console.log("connected as id " + connection.threadId + "\n");
+});
 
 
 // Ask the Manager if they would like to continue or end connection to DB //
@@ -155,7 +156,7 @@ function deleteProduct() {
 function askManager() {
     let managerOptions = [
         "\nSelect the Option Number for the Desired Task:\n",
-        "1. View Products Available for Purchase\n",
+        "1. View Products for Sale\n",
         "2. View Low Inventory\n",
         "3. Add to Inventory\n",
         "4. Add New Product\n",
@@ -163,8 +164,8 @@ function askManager() {
         "6. All Done\n",
     ];
 
-    for (i = [0]; i < askManager.length; i++) {
-        console.log(askManager[i]);
+    for (i = [0]; i < managerOptions.length; i++) {
+        console.log(managerOptions[i]);
     }
 
     inquirer.prompt({

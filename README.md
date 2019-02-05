@@ -25,7 +25,7 @@ BamazonManager:
 ![Alt text](/images/MySQL-Schema.PNG)
 
 ## Bamazon Customer App
-#### Command Line Interface showing:
+#### Screenshot 1 - Command Line Interface showing:
 * initial inventory when database created - SELECT query used,
 * initial user prompt - inquirer npm used,
 * order fulfilled message - SELECT query used
@@ -37,7 +37,7 @@ BamazonManager:
 * customer is prompted again
 
 
-![Alt text](/images/Customer.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
+![Alt text](/images/Customer1.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
 
 #### Screenshot 2 - Demonstate failure to fill an order due to insufficient quantity in inventory:
 * show current inventory after purchases, 
@@ -54,24 +54,24 @@ BamazonManager:
 * View Low Inventory option - Inventory Table displayed only with items with stock quantity less than 5, SELECT WHERE query used
 * Prompt Manager to determine if desires to continue 
 
-![Alt text](/images/manager1.PNG?raw=true "Photo of the command line interface showing manager option selected and response")
+![Alt text](/images/Manager1.PNG?raw=true "Photo of the command line interface showing manager option selected and response")
 
 #### Screenshot 2 - 
 * Add New Product option - prompt Manager to input product name, department, price, and quantity, INSERT and SELECT queries used
 * Add to Inventory option - prompt Manager to input Item id and quantity to add, display Inventory Table, SELECT and UPDATE queries used
 
-![Alt text](/images/manager2.PNG?raw=true "Photo of the command line interface showing manager option selected and response")
+![Alt text](/images/Manager2.PNG?raw=true "Photo of the command line interface showing manager option selected and response")
 
 #### Screenshot 3 -
 * Delete a product option - prompt Manager for Id of product to delete, DELETE query used 
 * All Done option - terminates connection to database using connection.end() for a clean end to database connection and Node.js app (no need for cntl C)
 
-![Alt text](/images/manager3.PNG?raw=true "Photo of the command line interface showing final manager option - All Done. With this option connection ends cleanly")
+![Alt text](/images/Manager3.PNG?raw=true "Photo of the command line interface showing final manager option - All Done. With this option connection ends cleanly")
 
 #### Screenshot 4 - 
-* Prompt Manager to determine if desires to continue, "No" is selected which invokes connection.end() for a clean end to database connection and Node.js app (no need for cntl C)
+* Prompt Manager to determine if desires to continue, "No" is selected which invokes connection.end() for a clean end to database connection and Node.js app (no need for Ctrl C)
 
-![Alt text](/images/manager4.PNG?raw=true "Photo of the command line interface showing manager choosing to finish and connection ends cleanly")
+![Alt text](/images/Manager4.PNG?raw=true "Photo of the command line interface showing manager choosing to finish and connection ends cleanly")
 
 # Technologies Used
 #### The following technologies and tools were used
