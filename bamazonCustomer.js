@@ -1,13 +1,11 @@
-// Required Packages //
 require("dotenv").config();
 const secret = require("./secret.js");
-const displayTable = require("./displayConstructor.js");
+let displayTable = require("./displayConstructor.js");
 
-// NPM Packages //
+// NPM Required Packages //
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const Table = require("cli-table2");
-// const chalk = require("chalk");
+let Table = require("cli-table2");
 const CFonts = require("cfonts");
 
 // Welcome to Bamazon! //
@@ -22,9 +20,8 @@ CFonts.say("Welcome to Bamazon!", {
   maxLength: "0", // define how many character can be on one line
 });
 
-
 // Connect to Database //
-let connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
@@ -59,7 +56,7 @@ function purchaseItem() {
       filter: Number
     },
     {
-      name: "quantity",
+      name: "stock",
       type: "input",
       message: "Enter the quantity you want to purchase",
       filter: Number
@@ -68,21 +65,21 @@ function purchaseItem() {
     // Query the DB to verify the Item ID exists with the requested quantity //
     connection.query("SELECT product, department, price, stock FROM products WHERE ?", {
       id: answer.id
-    }, function (err, response) {
-      console.log("\n You would like to buy " + answer.quantity + " " + response[0].product + " " + response[0].department + " at $" + response[0].price + "each");
-      if (response[0].stock >= answer.quantity) {
+    }, function (err, res) {
+      console.log("\n You would like to buy " + answer.stock + " " + res[0].product + " " + res[0].department + " at $" + res[0].price + "each");
+      if (res[0].stock >= answer.stock) {
         // If there is enough product in stock then fulfill the customer's order and provide the total cost of their purchase //
-        let itemQuantity = response[0].stock - answer.quantity;
+        let itemQuantity = res[0].stock - answer.stock;
         connection.query("UPDATE products SET ? WHERE ?", [{
             stock: itemQuantity
           },
           {
             id: answer.id
           }
-        ], function (err, response) {
+        ], function (err, res) {
 
         });
-        let cost = response[0].price * answer.quantity;
+        let cost = res[0].price * answer.stock;
         console.log("\n Your order has been placed! Your total is $" + cost.toFixed(2) + "\n");
         // Order Completed //
         customerPrompt();
@@ -97,7 +94,7 @@ function purchaseItem() {
 }
 
 
-// Ask the customer if they would like to continue shopping //
+// Ask the Customer if they would like to continue shopping //
 function customerPrompt() {
   inquirer.prompt({
     name: "action",
@@ -107,6 +104,7 @@ function customerPrompt() {
   }).then(function (answer) {
     switch (answer.action) {
       case "Yes":
+      purchaseItem();
         break;
       case "No":
         connection.end();
@@ -115,117 +113,3 @@ function customerPrompt() {
   })
 };
 
-
-// Start app by prompting the customer //
-customerPrompt();
-
-
-
-
-
-
-
-
-
-
-
-// connection.query(queryStock, {id: item}, function(err, data) {
-//   if (err) throw err;
-//   console.log("data = " + JSON.stringify(data));
-//   // If customer selects an invalid Item ID then data field will be empty //
-//   if (data.length === 0) {
-//     console.log("ERROR: Invalid Item ID. Please select a valid Item ID.");
-//     displayStock();
-//   } else {
-//     let productData = data[0];
-//     if (quantity <= productData.stock) {
-//       console.log("The Item ID you requested is in stock. Placing order!");
-
-//       // Update the Products //
-//       let updateProducts = "UPDATE products SET stock = " + (productData.stock - quantity) + "WHERE id = " + item;
-
-//       // Update the SQL DB to reflect the remaining Quantity //
-//       connection.query(updateProducts, function(err, data) {
-//         if (err) throw err;
-//         // If there is enough product in stock then fulfill the customer's order and provide the total cost of their purchase //
-//         console.log("Your order has been placed! Your total is $" + productData.price * quantity);
-//         console.log("Thank you for shopping with Bamazon!");
-//         console.log("\n-------------------------------------------------------------------\n");
-
-//         connection.end();
-//       })
-//     } else {
-//       // If not enough in stock then display a message "Insufficient quantity!" and then prevent the order from going through //
-//       console.log("Insufficient quantity! Please modify your order.");
-//       console.log("\n---------------------------------------------------------------------\n");
-
-//       displayProducts();
-//     }
-//   }
-// })
-
-// function customerSelection() {
-//   displayProducts(function (response) {
-//     let selectionArr = [];
-//     for (var i = 0; i < response.length; i++) {
-//       selectionArr.push(response[i].id + " " + response[i].product);
-//     }
-//     inquirer.prompt({
-//       name: "product",
-//       type: "input",
-//       message: "What item would you like to purchase? (Choose ID)",
-//       choices: [
-//         "Earth Rated Dog Waste Bags",
-//         "Petmate Charcoal Replacement Water Filters",
-//         "Hugger Mugger Tropic Yoga Mat",
-//         "Hugger Mugger Batik Yoga Mat Bag",
-//         "Stance Women's Cream Frio Socks",
-//         "Nag Champa Incense Sticks",
-//         "doTERRA Family Essential Oil Kit",
-//         "Stainless Steel Tea Infuser",
-//         "Nalgene Wide Mouth Water Bottle",
-//         "Pepcid Complete Acid Reducer",
-//         "Ibuprofen Pain Reliever",
-//         "Nature's Way Raw Organic Coconut Oil",
-//         "Vega Protein+ Chocolate Shake (12 ct.)",
-//         "AudioQuest 4K Ultra HD HDMI Cable",
-//         "LCR Left Center Right Dice Game"
-//       ]
-//     }).then(function (answer) {
-//       console.log(answer.product);
-//       switch (answer.product) {
-//         case "Find products by product":
-//           productSearch();
-//           break;
-//       }
-//       connection.end();
-//     });
-//   })
-// };
-// customerSelection();
-
-
-
-
-
-// Once order is placed check stock quantity to see if there is enough inventory to meet the customers request //
-// function displayStock() {
-//   queryStock = "SELECT * FROM products";
-//   connection.query(queryStock, function(err, data) {
-//     if (err) throw err;
-//     console.log("Current Inventory: ");
-//     console.log("................................\n");
-
-//     let outStock = " ";
-//     for (var i = 0; i < data.length; i++) {
-//       outStock = " ";
-//       outStock += "Item ID: " + data[i].id + " // ";
-//       outStock += "Product Name: " + data[i].product + " // ";
-//       outStock += "Department: " + data[i].department + " // ";
-//       outStock += "Price: $" + data[i].price + "\n";
-//       console.log(outStock);
-//     }
-//     console.log("------------------------------------------------\n");
-//     customerPrompt();
-//   })
-// }

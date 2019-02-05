@@ -14,9 +14,9 @@ let displayTable = function() {
 
     this.displayInventoryTable = function(results) {
     	this.results = results;
-	    for (var i=0; i <this.results.length; i++) {
+	    for (var i = 0; i < this.results.length; i++) {
 	        this.table.push(
-	            [this.results[i].ItemID, this.results[i].ProductName, "$" + this.results[i].Price, this.results[i].StockQuantity] );
+	            [this.results[i].id, this.results[i].product, this.results[i].department, "$" + this.results[i].price, this.results[i].stock] );
 	    }
     	console.log("\n" + this.table.toString());
 	};
