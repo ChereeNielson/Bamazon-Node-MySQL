@@ -106,8 +106,7 @@ function customerPrompt() {
   }).then(function (answer) {
     switch (answer.action) {
       case "Yes":
-      displayProducts();
-      // purchaseItem();
+        displayProducts();
         break;
       case "No":
         console.log("Thank you for shopping with Bamazon!");

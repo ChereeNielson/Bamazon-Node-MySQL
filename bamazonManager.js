@@ -36,12 +36,13 @@ function promptManager() {
         message: "Would you like to continue?",
         choices: ["Yes", "No"]
     }).then(function(answer) {
-        switch(answer.action) {
+        switch (answer.action) {
             case "Yes":
                 askManager();
             break;
 
             case "No":
+                console.log("Have a great day!");
                 connection.end();
             break;
         }
