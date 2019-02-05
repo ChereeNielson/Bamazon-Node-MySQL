@@ -14,7 +14,7 @@ CFonts.say("Welcome to Bamazon!", {
   align: "left", // define text alignment
   colors: ["blue", "green", "magenta"], // define all colors
   background: "transparent", // define the background color
-  letterSpacing: 2, // define letter spacing
+  letterSpacing: 3, // define letter spacing
   lineHeight: 5, // define the line height
   space: true, // define if the output text should have empty lines on top and on the bottom
   maxLength: "0", // define how many character can be on one line
@@ -31,7 +31,7 @@ const connection = mysql.createConnection({
 
 connection.connect(function (err) {
   if (err) throw err;
-  console.log("connected as id " + connection.threadId + "\n");
+  // console.log("connected as id " + connection.threadId + "\n");
   displayProducts();
 });
 

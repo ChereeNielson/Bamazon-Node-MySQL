@@ -17,6 +17,10 @@ BamazonManager - allows a manager to:
 * Add New Product
 * Delete a Product
 
+### Welcome to Bamazon!
+
+![Alt text](/images/Bamazon.PNG)
+
 # Screenshots
 #### Bamazon schema in MySQL Workbench
 
