@@ -1,4 +1,4 @@
-# Bamazon-Node-MySQL
+# Welcome to Bamazon!
 
 ## Node + MySQL Overview
 This is a Command Line Node app that mimics a beloved online retailer. A digital Amazon-like storefront using Node + MySQL. 
@@ -10,24 +10,22 @@ BamazonCustomer:
 * Computes the Cost of the Order
 * Depletes the Stock from the Store's Inventory
 
-BamazonManager - allows a manager to:
+BamazonManager:
 * View Products for Sale 
 * View Low Inventory 
 * Add to Inventory
 * Add New Product
 * Delete a Product
 
-### Welcome to Bamazon!
-
 ![Alt text](/images/Bamazon.PNG)
 
 # Screenshots
-#### Bamazon schema in MySQL Workbench
+#### Bamazon Schema in MySQL Workbench
 
-![Alt text](/images/schema.PNG?raw=true "Photo of the MySQL Workbench showing the schema and initial inventory")
+![Alt text](/images/MySQL-Schema.PNG)
 
 ## Bamazon Customer App
-#### Screenshot 1 - Command Line Interface showing:
+#### Command Line Interface showing:
 * initial inventory when database created - SELECT query used,
 * initial user prompt - inquirer npm used,
 * order fulfilled message - SELECT query used

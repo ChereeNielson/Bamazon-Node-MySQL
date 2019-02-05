@@ -30,7 +30,10 @@ const connection = mysql.createConnection({
 });
 
 connection.connect(function (err) {
-  if (err) throw err;
+  if (err) {
+    console.log("Error connecting to DB");
+    throw err;
+  }
   // console.log("connected as id " + connection.threadId + "\n");
   displayProducts();
 });
@@ -52,24 +55,22 @@ function purchaseItem() {
   inquirer.prompt([{
       name: "id",
       type: "input",
-      message: "Enter the Item ID of the product you want to purchase",
+      message: "Enter the Item ID of the product you want to purchase:",
       filter: Number
     },
     {
-      name: "stock",
+      name: "quantity",
       type: "input",
-      message: "Enter the quantity you want to purchase",
+      message: "Enter the quantity you want to purchase:",
       filter: Number
     }
   ]).then(function (answer) {
     // Query the DB to verify the Item ID exists with the requested quantity //
-    connection.query("SELECT product, department, price, stock FROM products WHERE ?", {
-      id: answer.id
-    }, function (err, res) {
-      console.log("\n You would like to buy " + answer.stock + " " + res[0].product + " " + res[0].department + " at $" + res[0].price + "each");
-      if (res[0].stock >= answer.stock) {
+    connection.query("SELECT product, department, price, stock FROM products WHERE ?", {id: answer.id}, function (err, res) {
+      console.log("\n You would like to buy " + answer.quantity + " " + res[0].product + " at $" + res[0].price + " (each)");
+      if (res[0].stock >= answer.quantity) {
         // If there is enough product in stock then fulfill the customer's order and provide the total cost of their purchase //
-        let itemQuantity = res[0].stock - answer.stock;
+        let itemQuantity = res[0].stock - answer.quantity;
         connection.query("UPDATE products SET ? WHERE ?", [{
             stock: itemQuantity
           },
@@ -79,13 +80,14 @@ function purchaseItem() {
         ], function (err, res) {
 
         });
-        let cost = res[0].price * answer.stock;
+        let cost = res[0].price * answer.quantity;
         console.log("\n Your order has been placed! Your total is $" + cost.toFixed(2) + "\n");
+        // displayTable();
         // Order Completed //
         customerPrompt();
       } else {
         // If not enough in stock then display a message "Insufficient quantity!" and then prevent the order from going through //
-        console.log("\n Insufficient quantity! Please modify your order.\n");
+        console.log("\n Sorry, insufficient quantity to fulfill your order.\n");
         // Order Not Completed //
         customerPrompt();
       }
@@ -99,17 +101,20 @@ function customerPrompt() {
   inquirer.prompt({
     name: "action",
     type: "list",
-    message: " Would you like to continue shopping?\n",
+    message: "Would you like to continue shopping?",
     choices: ["Yes", "No"]
   }).then(function (answer) {
     switch (answer.action) {
       case "Yes":
-      purchaseItem();
+      displayProducts();
+      // purchaseItem();
         break;
       case "No":
+        console.log("Thank you for shopping with Bamazon!");
         connection.end();
         break;
     }
   })
 };
 
+displayTable();
