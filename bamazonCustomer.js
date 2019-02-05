@@ -116,5 +116,3 @@ function customerPrompt() {
     }
   })
 };
-
-displayTable();

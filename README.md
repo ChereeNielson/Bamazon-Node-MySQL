@@ -37,7 +37,7 @@ BamazonManager:
 * customer is prompted again
 
 
-![Alt text](/images/customer1.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
+![Alt text](/images/Customer.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
 
 #### Screenshot 2 - Demonstate failure to fill an order due to insufficient quantity in inventory:
 * show current inventory after purchases, 
@@ -46,7 +46,7 @@ BamazonManager:
 * customer prompted for desire to order again - connection.end() used for clean end to node.js app
 
 
-![Alt text](/images/customer2.PNG?raw=true "Photo of the command line interface showing table with inventory and customer prompts")
+![Alt text](/images/Customer2.PNG?raw=true "Photo of the command line interface showing table with inventory and customer prompts")
 
 ## Bamazon Manager App
 #### Screenshot 1 - Node command line interface showing:

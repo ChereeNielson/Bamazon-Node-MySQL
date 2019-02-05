@@ -17,7 +17,7 @@ CREATE TABLE products (
 
 SELECT * FROM products;
 
-INSERT INTO products (id, product, department, price, stock)
+INSERT INTO products (product, department, price, stock)
 VALUES ("Earth Rated Dog Waste Bags", "Pet Supplies", 11.99, 300),
   ("Petmate Charcoal Replacement Water Filters", "Pet Supplies", 2.15, 120),
   ("Hugger Mugger Tropic Yoga Mat", "Exercise & Fitness Equipment", 25.25, 200),
